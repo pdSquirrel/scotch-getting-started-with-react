@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { get } from 'axios';
 import ZipForm from './ZipForm';
 import WeatherList from './WeatherList';
+import CurrentDay from './CurrentDay';
 
 export default class App extends Component {
   constructor(props) {
@@ -32,10 +33,24 @@ export default class App extends Component {
   }
 
   render() {
+    /*
+       pulling vars from state to get rid
+       of 'this.state.' in the components bellow
+    */
+    const { city, dates, selectedDate } = this.state;
+
     return(
       <div className="app">
         <ZipForm onSubmit={this.onFormSubmit} />
-        <WeatherList days={this.state.dates} onDayClicked={this.onDayClicked} />
+        <WeatherList days={dates} onDayClicked={this.onDayClicked} />
+        /*
+          conditional render bellow. Both needs to be true to actully
+          render the CurrentDay component.
+        */
+        {
+          this.state.selectedDate !== null &&
+          <CurrentDay city={city} day={dates[selectedDate]} />
+        }
       </div>
     );
   }
