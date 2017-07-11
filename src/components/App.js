@@ -43,11 +43,11 @@ export default class App extends Component {
       <div className="app">
         <ZipForm onSubmit={this.onFormSubmit} />
         <WeatherList days={dates} onDayClicked={this.onDayClicked} />
-        {/*
-          conditional render bellow. Both needs to be true to actully
-          render the CurrentDay component.
-        */}
         {
+          /*
+            conditional render bellow. Both needs to be true to actully
+            render the CurrentDay component.
+          */
           this.state.selectedDate !== null &&
           <CurrentDay city={city} day={dates[selectedDate]} />
         }
